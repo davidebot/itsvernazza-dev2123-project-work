@@ -13,3 +13,10 @@ export const elencoMovimenti = createSelector(
         return state.movimenti.filter(movimento => movimento.beneficiarioIban === userState.logged?.iban || movimento.ordinanteIban === userState.logged?.iban);
     }
 );
+
+// export const elencoMovimenti = createSelector(
+//     movimentoState,
+//     (state: MovimentiReducerType): MovimentoModel[] => {
+//         return state.movimenti;
+//     }
+// );

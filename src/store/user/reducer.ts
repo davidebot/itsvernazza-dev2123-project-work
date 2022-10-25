@@ -20,6 +20,7 @@ const initialState: UserReducerType = {
         }
     ],
     logged: undefined,
+    loginError: ""
 };
 
 export const userReducer = createReducer(initialState, (builder) => {
@@ -32,8 +33,10 @@ export const userReducer = createReducer(initialState, (builder) => {
                 );
             if (logged) {
                 state.logged = logged;
+                state.loginError = "";
             } else {
                 state.logged = undefined;
+                state.loginError = "Utente o password non validi";
             }
         });
 });
