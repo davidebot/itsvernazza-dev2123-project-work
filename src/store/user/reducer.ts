@@ -19,13 +19,8 @@ const initialState: UserReducerType = {
             iban: "IT30A0300203280117363366565"
         }
     ],
-    logged: {
-        username: "mario.rossi@test.it",
-        password: "123456",
-        name: "Mario",
-        surname: "Rossi",
-        iban: "IT88N0300203280253948841999"
-    },
+    logged: undefined,
+    loginError: ""
 };
 
 export const userReducer = createReducer(initialState, (builder) => {
@@ -38,8 +33,10 @@ export const userReducer = createReducer(initialState, (builder) => {
                 );
             if (logged) {
                 state.logged = logged;
+                state.loginError = "";
             } else {
                 state.logged = undefined;
+                state.loginError = "Utente o password non validi";
             }
         });
 });
