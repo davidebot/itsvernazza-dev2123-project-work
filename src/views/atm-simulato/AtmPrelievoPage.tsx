@@ -76,9 +76,9 @@ const AtmPrelievoPage: React.FC = (): JSX.Element => {
             <DatiUtente />
             {statoPagina === "1" &&
                 <>
-                    <Row className="justify-content-around  mt-5 py-3  text-center">
+                    <Row className="justify-content-around  mt-2 py-3  text-center">
 
-                        <Col sm={6} >
+                        <Col sm={6}>
                             <label
                                 className="py-3 h4"
                             >
