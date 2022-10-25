@@ -8,13 +8,13 @@ const initialState: MovimentiReducerType = {
     movimenti: [
         {
             idMovimento: 1,
-            beneficiarioDenominazione: "tommaso",
+            beneficiarioDenominazione: "Mario Rossi",
             beneficiarioIban: "IT88N0300203280253948841999",
             categoria: CategoriaMovimentoEnum.Bonifico,
             data: new Date().getTime(),
             importo: 200,
-            ordinanteDenominazione: "marco",
-            ordinanteIban: "ccccc",
+            ordinanteDenominazione: "Francesca Bianchi",
+            ordinanteIban: "IT30A0300203280117363366565",
             causale: "causaleMessa"
         }
     ]
