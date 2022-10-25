@@ -24,13 +24,8 @@ const UserLoginPage: React.FC = (): JSX.Element => {
         }
     }, [userIsLogged]);
 
-    useEffect(() => {
-        console.log(userLoginError);
-    }, [userLoginError]);
-
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-
 
     return (
         <Container className="px-5">
@@ -54,7 +49,7 @@ const UserLoginPage: React.FC = (): JSX.Element => {
                                                 label="Username"
                                                 className="mb-3"
                                             >
-                                                <Form.Control onChange={(event) => setUsername(event.target.value)} value={username} type="email" placeholder="name@example.com" />
+                                                <Form.Control autoComplete="username" onChange={(event) => setUsername(event.target.value)} value={username} type="email" placeholder="name@example.com" />
                                             </FloatingLabel>
 
                                             <FloatingLabel
@@ -62,7 +57,7 @@ const UserLoginPage: React.FC = (): JSX.Element => {
                                                 label="Password"
                                                 className="mb-3"
                                             >
-                                                <Form.Control onChange={(event) => setPassword(event.target.value)} value={password} type="password" placeholder="Password" />
+                                                <Form.Control autoComplete="current-password" onChange={(event) => setPassword(event.target.value)} value={password} type="password" placeholder="Password" />
                                             </FloatingLabel>
 
                                             <Form.Control.Feedback className="d-block" type="invalid">

@@ -1,14 +1,25 @@
-import classNames from "classnames";
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import RouteEnum from "../constants/RouteEnum";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { userLogout } from "../store/user/actions";
 import { isLogged } from "../store/user/selectors";
 import logoApp from "./../assets/img/logo.svg";
 
 const Header: React.FC = (): JSX.Element => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const logout = () => dispatch(userLogout());
     const userIsLogged = useAppSelector(isLogged);
+
+    useEffect(() => {
+        if (userIsLogged !== true && location.pathname !== RouteEnum.Login) {
+            navigate(RouteEnum.Login);
+        }
+    }, [userIsLogged, location.pathname]);
+
 
     return (
         <header>
@@ -21,64 +32,32 @@ const Header: React.FC = (): JSX.Element => {
                     <Navbar.Toggle aria-controls="app-navbar-nav" />
                     <Navbar.Collapse id="app-navbar-nav">
                         <Nav className="ms-auto">
-                            {userIsLogged ? (
+                            {userIsLogged && (
                                 <>
                                     <Nav.Item>
-                                        <NavLink
-                                            to={RouteEnum.Movimenti}
-                                            className={({ isActive }) => classNames(
-                                                "text-decoration-none text-white",
-                                                { "active": isActive }
-                                            )}
-                                        >
-                                            <Nav.Link as={Link} to={RouteEnum.Movimenti} >
-                                                Movimenti
-                                            </Nav.Link>
-                                        </NavLink>
+                                        <Nav.Link onClick={() => navigate(RouteEnum.Movimenti)}>
+                                            Movimenti
+                                        </Nav.Link>
                                     </Nav.Item>
 
                                     <Nav.Item>
-                                        <NavLink
-                                            to={RouteEnum.AtmSimulato}
-                                            className={({ isActive }) => classNames(
-                                                "text-decoration-none text-white",
-                                                { "active": isActive }
-                                            )}
-                                        >
-                                            <Nav.Link as={Link} to={RouteEnum.AtmSimulato} >
-                                                ATM Simulato
-                                            </Nav.Link>
-                                        </NavLink>
+                                        <Nav.Link onClick={() => navigate(RouteEnum.AtmSimulato)}>
+                                            ATM Simulato
+                                        </Nav.Link>
                                     </Nav.Item>
 
                                     <Nav.Item>
-                                        <NavLink
-                                            to={RouteEnum.Gestione}
-                                            className={({ isActive }) => classNames(
-                                                "text-decoration-none text-white",
-                                                { "active": isActive }
-                                            )}
-                                        >
-                                            <Nav.Link as={Link} to={RouteEnum.Gestione} >
-                                                Profilo
-                                            </Nav.Link>
-                                        </NavLink>
+                                        <Nav.Link onClick={() => navigate(RouteEnum.Gestione)}>
+                                            Profilo
+                                        </Nav.Link>
+                                    </Nav.Item>
+
+                                    <Nav.Item>
+                                        <Nav.Link className="text-danger fw-bolder" onClick={() => logout()}>
+                                            Logout
+                                        </Nav.Link>
                                     </Nav.Item>
                                 </>
-                            ) : (
-                                <Nav.Item>
-                                    <NavLink
-                                        to={RouteEnum.Login}
-                                        className={({ isActive }) => classNames(
-                                            "text-decoration-none text-white",
-                                            { "active": isActive }
-                                        )}
-                                    >
-                                        <Nav.Link as={Link} to={RouteEnum.Login} >
-                                            Accedi
-                                        </Nav.Link>
-                                    </NavLink>
-                                </Nav.Item>
                             )}
                         </Nav>
                     </Navbar.Collapse>
