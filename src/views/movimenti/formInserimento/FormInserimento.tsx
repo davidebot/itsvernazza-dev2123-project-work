@@ -1,26 +1,42 @@
-import React from "react";
-import { Button, Card, Col, Container, FloatingLabel, Form, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import RouteEnum from "../../../constants/RouteEnum";
+import InserimentoBonificoModel from "../../../models/movimento/InserimentoBonificoModel";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { inserimentoBonifico } from "../../../store/movimento/actions";
 import { elencoMovimenti } from "../../../store/movimento/selectors";
+import { currentIban, userDenominazione } from "../../../store/user/selectors";
+import CampoInput from "../components/CampoInput";
 
 const FormInserimento = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const movimenti = useAppSelector(elencoMovimenti);
+    const ordinanteDenominazione = useAppSelector(userDenominazione);
+    const ordinanteIban = useAppSelector(currentIban);
 
     const formSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
         e?.preventDefault();
-        //TODO
-        //dispatch(userLogin(new UserLoginViewModel()));
-        dispatch(inserimentoBonifico);
+        if (ordinanteDenominazione !== undefined && ordinanteIban !== undefined) {
+            const nuovoBonifico: InserimentoBonificoModel = {
+                beneficiarioDenominazione: denBeneficiario,
+                beneficiarioIban: ibanBeneficiario,
+                ordinanteDenominazione: ordinanteDenominazione,
+                ordinanteIban: ordinanteIban,
+                causale: causale,
+                importo: parseFloat(importo),
+            };
+            dispatch(inserimentoBonifico(nuovoBonifico));
+            console.log(movimenti);
+        }
 
-        console.log(movimenti);
-        navigate(RouteEnum.InserimentoBonifico);
+        // navigate(RouteEnum.InserimentoBonifico);
     };
 
+    const [denBeneficiario, setDenBeneficiario] = useState<string>("");
+    const [ibanBeneficiario, setIbanBeneficiario] = useState<string>("");
+    const [causale, setCausale] = useState<string>("");
+    const [importo, setImporto] = useState<string>("");
 
     return (
         <Container className="px-5">
@@ -37,37 +53,15 @@ const FormInserimento = () => {
                                 <Row>
                                     <Col>
                                         <Form onSubmit={formSubmit}>
-                                            <FloatingLabel
-                                                controlId="formInserimentoDenominazione"
-                                                label="Beneficiario"
-                                                className="mb-3"
-                                            >
-                                                <Form.Control type="text" placeholder="denominazione beneficiario" />
-                                            </FloatingLabel>
 
-                                            <FloatingLabel
-                                                controlId="formInserimentoIBAN"
-                                                label="IBAN"
-                                                className="mb-3"
-                                            >
-                                                <Form.Control type="text" placeholder="IBAN Beneficiario" />
-                                            </FloatingLabel>
 
-                                            <FloatingLabel
-                                                controlId="causale"
-                                                label="Causale"
-                                                className="mb-3"
-                                            >
-                                                <Form.Control type="text" placeholder="Causale" />
-                                            </FloatingLabel>
+                                            <CampoInput controlId="formInserimentoDenominazione" label="Beneficiario" type="text" placeholder="denominazione" value={denBeneficiario} setValue={setDenBeneficiario} />
 
-                                            <FloatingLabel
-                                                controlId="Importo"
-                                                label="Importo"
-                                                className="mb-3"
-                                            >
-                                                <Form.Control type="number" placeholder="Importo" />
-                                            </FloatingLabel>
+                                            <CampoInput controlId="formInserimentoIBAN" label="IBAN" type="text" placeholder="IBAN Beneficiario" value={ibanBeneficiario} setValue={setIbanBeneficiario} />
+
+                                            <CampoInput controlId="causale" label="Causale" type="text" placeholder="Causale" value={causale} setValue={setCausale} />
+
+                                            <CampoInput controlId="Importo" label="Importo" type="number" placeholder="Importo" value={importo} setValue={setImporto} />
 
                                             <Row>
                                                 <Col className="text-center mt-3">

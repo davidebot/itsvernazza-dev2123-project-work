@@ -6,11 +6,12 @@ export class MovimentoModel {
     public readonly ordinanteIban: string = "";
     public readonly beneficiarioDenominazione: string = "";
     public readonly beneficiarioIban: string = "";
+    public readonly causale: string = "";
     public readonly importo: number = 0;
     public readonly data: number = 0;
     public readonly categoria: CategoriaMovimentoEnum = CategoriaMovimentoEnum.Bonifico;
 
-    constructor(data: Partial<MovimentoModel>) {
+    constructor(data: MovimentoModel) {
         this.idMovimento = data.idMovimento ?? 0;
         this.ordinanteDenominazione = data.ordinanteDenominazione ?? "";
         this.ordinanteIban = data.ordinanteIban ?? "";

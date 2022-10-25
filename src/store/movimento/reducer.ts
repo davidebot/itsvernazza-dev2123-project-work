@@ -15,6 +15,7 @@ const initialState: MovimentiReducerType = {
             importo: 200,
             ordinanteDenominazione: "marco",
             ordinanteIban: "ccccc",
+            causale: "causaleMessa"
         }
     ]
 };
@@ -33,6 +34,7 @@ export const movimentoReducer = createReducer(initialState, (builder) => {
                     idMovimento,
                     data: new Date().getTime(),
                     categoria: CategoriaMovimentoEnum.Bonifico,
+
                 }
             );
             state.movimenti = [...state.movimenti, nuovoMovimento];
