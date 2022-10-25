@@ -9,3 +9,10 @@ export const currentIban = createSelector(
         return state.logged?.iban;
     }
 );
+
+export const userDenominazione = createSelector(
+    userState,
+    (state: UserReducerType): string | undefined => {
+        return `${state.logged?.name} ${state.logged?.surname}`;
+    }
+);
