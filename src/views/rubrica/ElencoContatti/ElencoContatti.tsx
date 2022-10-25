@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import RouteEnum from "../../../constants/RouteEnum";
 import { ContattoModel } from "../../../models/contatto/ContattoModel";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { modificaContatto } from "../../../store/rubrica/actions";
+import { eliminaContatto } from "../../../store/rubrica/actions";
 import { elencoContatti } from "../../../store/rubrica/selectors";
 
 function ElencoContatti() {
@@ -15,20 +15,17 @@ function ElencoContatti() {
         navigate(RouteEnum.InserimentoContatto);
     };
 
-    const onClickModificaContatto = (contattoDaTrovare: ContattoModel) => {
+    const onClickModificaContatto = (idContattoDaModificare: number) => {
+        navigate("/modifica-contatto/" + idContattoDaModificare);
 
+    };
 
-        const contattoModificato: ContattoModel = {
-            idContatto: contattoDaTrovare.idContatto,
-            denominazione: contattoDaTrovare.denominazione,
-            iban: contattoDaTrovare.iban
-        };
-        dispatch(modificaContatto(contattoModificato));
+    const onClickEliminaContatto = (idContattoDaEliminare: number) => {
+        dispatch(eliminaContatto(idContattoDaEliminare));
     };
 
     return (
         <>
-
             <Container>
                 <Row>
                     <Col>
@@ -48,10 +45,10 @@ function ElencoContatti() {
                                         <td>{contatto.denominazione}</td>
                                         <td>{contatto.iban}</td>
                                         <td>
-                                            <Button variant="primary" type="submit" onClick={() => onClickModificaContatto(contatto)}>
+                                            <Button variant="primary" type="submit" onClick={() => onClickModificaContatto(contatto.idContatto)}>
                                                 Modifica contatto
                                             </Button>
-                                            <Button variant="primary" type="submit">
+                                            <Button onClick={() => onClickEliminaContatto(contatto.idContatto)} variant="primary" type="submit">
                                                 Elimina contatto
                                             </Button>
                                         </td>

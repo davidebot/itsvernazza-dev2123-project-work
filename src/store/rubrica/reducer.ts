@@ -31,12 +31,12 @@ export const contattoReducer = createReducer(initialState, (builder) => {
             state.contatti = [...state.contatti, nuovoContatto];
         })
         .addCase(modificaContatto, (state, action) => {
-            const listaContatti = state.contatti, contattoTrovato = action.payload;
-            const contattoDaAggiornare = listaContatti.find(contatto => contatto.idContatto === contattoTrovato.idContatto);
-            if (contattoDaAggiornare !== undefined) {
-                contattoDaAggiornare.denominazione = contattoTrovato.denominazione;
-                contattoDaAggiornare.iban = contattoTrovato.iban;
-            }
+            debugger;
+            const contattoTrovato = action.payload;
+            const nuoviContatti = state.contatti.map(contatto => contatto.idContatto === contattoTrovato.idContatto ? contattoTrovato : contatto);
+            console.log(state.contatti);
+            state.contatti = [...nuoviContatti];
+            console.log(state.contatti);
         })
         .addCase(eliminaContatto, (state, action) => {
             const idDaEliminare = action.payload;
