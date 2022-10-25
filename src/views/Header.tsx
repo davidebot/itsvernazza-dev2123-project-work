@@ -39,6 +39,20 @@ const Header: React.FC = (): JSX.Element => {
 
                                     <Nav.Item>
                                         <NavLink
+                                            to={RouteEnum.Rubrica}
+                                            className={({ isActive }) => classNames(
+                                                "text-decoration-none text-white",
+                                                { "active": isActive }
+                                            )}
+                                        >
+                                            <Nav.Link as={Link} to={RouteEnum.Rubrica} >
+                                                Rubrica
+                                            </Nav.Link>
+                                        </NavLink>
+                                    </Nav.Item>
+
+                                    <Nav.Item>
+                                        <NavLink
                                             to={RouteEnum.AtmSimulato}
                                             className={({ isActive }) => classNames(
                                                 "text-decoration-none text-white",
