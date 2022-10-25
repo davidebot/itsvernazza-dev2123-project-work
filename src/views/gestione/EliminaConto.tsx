@@ -12,7 +12,7 @@ const EliminaConto = () => {
     const dispatch = useAppDispatch();
 
     function eliminaConto() {
-        dispatch(userDelete);
+        dispatch(userDelete());
     }
 
 

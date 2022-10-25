@@ -44,5 +44,6 @@ export const userReducer = createReducer(initialState, (builder) => {
         })
         .addCase(userDelete, (state, action) => {
             state.users = [...state.users.filter(user => user.iban !== state.logged?.iban)];
+            state.logged = undefined;
         });
 });
