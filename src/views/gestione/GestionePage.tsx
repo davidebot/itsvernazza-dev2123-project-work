@@ -2,6 +2,7 @@ import { Tab, Tabs } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import Convenzioni from "./Convenzioni";
 import Dati from "./Dati";
+import EliminaConto from "./EliminaConto";
 
 const GestionePage = () => {
     return (
@@ -22,6 +23,7 @@ const GestionePage = () => {
 
                 </Tab>
                 <Tab eventKey="eliminaConto" title="ELIMINA CONTO">
+                    <EliminaConto />
                 </Tab>
             </Tabs>
         </Card>
