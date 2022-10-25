@@ -17,6 +17,7 @@ export class MovimentoModel {
         this.ordinanteIban = data.ordinanteIban ?? "";
         this.beneficiarioDenominazione = data.beneficiarioDenominazione ?? "";
         this.beneficiarioIban = data.beneficiarioIban ?? "";
+        this.causale = data.causale ?? "";
         this.importo = data.importo ?? 0;
         this.data = data.data ?? new Date().getTime();
         this.categoria = data.categoria ?? CategoriaMovimentoEnum.Bonifico;

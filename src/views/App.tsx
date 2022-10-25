@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import RouteEnum from "../constants/RouteEnum";
 import GestionePage from "./gestione/GestionePage";
-import ListaMovimenti from "./ListaMovimenti";
+import ListaMovimenti from "./movimenti/elencoMovimenti/ListaMovimenti";
 import FormInserimento from "./movimenti/formInserimento/FormInserimento";
 import Template from "./Template";
 import UserLoginPage from "./user/UserLoginPage";
