@@ -8,7 +8,7 @@ import { elencoMovimenti } from "../../../store/movimento/selectors";
 import { currentIban, userDenominazione } from "../../../store/user/selectors";
 import CampoInput from "../components/CampoInput";
 
-const FormInserimento = () => {
+const FormInserimentoMovimento = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const movimenti = useAppSelector(elencoMovimenti);
@@ -87,4 +87,4 @@ const FormInserimento = () => {
     );
 };
 
-export default FormInserimento;
+export default FormInserimentoMovimento;

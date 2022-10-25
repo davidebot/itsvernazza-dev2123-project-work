@@ -39,6 +39,11 @@ const Header: React.FC = (): JSX.Element => {
                                             Movimenti
                                         </Nav.Link>
                                     </Nav.Item>
+                                    <Nav.Item>
+                                        <Nav.Link onClick={() => navigate(RouteEnum.Rubrica)}>
+                                            Rubrica
+                                        </Nav.Link>
+                                    </Nav.Item>
 
                                     <Nav.Item>
                                         <Nav.Link onClick={() => navigate(RouteEnum.AtmSimulato)}>

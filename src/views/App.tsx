@@ -6,7 +6,9 @@ import AtmSceltaOperazionePage from "./atm-simulato/AtmSceltaOperazionePage";
 import AtmVersamentoPage from "./atm-simulato/AtmVersamentoPage";
 import GestionePage from "./gestione/GestionePage";
 import ListaMovimenti from "./movimenti/elencoMovimenti/ListaMovimenti";
-import FormInserimento from "./movimenti/formInserimento/FormInserimento";
+import FormInserimentoMovimento from "./movimenti/formInserimento/FormInserimentoMovimento";
+import ElencoContatti from "./rubrica/ElencoContatti/ElencoContatti";
+import FormInserimentoContatto from "./rubrica/formInserimentoContatto/FormInserimentoContatto";
 import Template from "./Template";
 import GestioneProfiloPage from "./user/GestioneProfiloPage";
 import UserLoginPage from "./user/UserLoginPage";
@@ -18,9 +20,11 @@ const App: React.FC = (): JSX.Element => {
                 <Route path="/" element={<Template />}>
                     <Route path="/" element={<Navigate to={RouteEnum.Login} replace={true} />} />
                     <Route path={RouteEnum.Login} element={<UserLoginPage />} />
-                    <Route path={RouteEnum.Rubrica} element={<>TODO</>} />
+                    <Route path={RouteEnum.Rubrica} element={<ElencoContatti />} />
                     <Route path={RouteEnum.Movimenti} element={<ListaMovimenti />} />
-                    <Route path={RouteEnum.InserimentoBonifico} element={<FormInserimento />} />
+                    <Route path={RouteEnum.InserimentoBonifico} element={<FormInserimentoMovimento />} />
+                    <Route path={RouteEnum.InserimentoContatto} element={<FormInserimentoContatto />} />
+                    <Route path={RouteEnum.AtmSimulato} element={<>TODO</>} />
                     <Route path={RouteEnum.AtmSimulato} element={<AtmSceltaOperazionePage />} />
                     <Route path={RouteEnum.Prelievo} element={<AtmPrelievoPage />} />
                     <Route path={RouteEnum.Versamento} element={<AtmVersamentoPage />} />

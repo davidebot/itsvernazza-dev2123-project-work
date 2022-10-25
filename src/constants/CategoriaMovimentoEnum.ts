@@ -1,7 +1,7 @@
 enum CategoriaMovimentoEnum {
-    Bonifico,
-    Prelievo,
-    Versamento
+    Bonifico = "Bonifico",
+    Prelievo = "Prelievo",
+    Versamento = "Versamento"
 
 }
 

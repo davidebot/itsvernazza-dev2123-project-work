@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import CategoriaMovimentoEnum from "../../../constants/CategoriaMovimentoEnum";
 import RouteEnum from "../../../constants/RouteEnum";
+import CampoSelect from "../../../models/movimento/CampoSelect";
 import { MovimentoModel } from "../../../models/movimento/MovimentoModel";
 import { useAppSelector } from "../../../store/hooks";
 import { elencoMovimenti } from "../../../store/movimento/selectors";
@@ -14,6 +16,7 @@ function ListaMovimenti() {
     };
 
     const movimenti: MovimentoModel[] = useAppSelector(elencoMovimenti);
+    const categorie: string[] = Object.keys(CategoriaMovimentoEnum);
 
     const getDescrizioneCategoria = (categoria: CategoriaMovimentoEnum) => {
         switch (categoria) {
@@ -26,12 +29,20 @@ function ListaMovimenti() {
         }
     };
 
+    const [categoriaRicerca, setCategoriaRicerca] = useState<string>("");
+
+    const onChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setCategoriaRicerca(event.target.value);
+    };
+
     return (
         <>
 
             <Container>
                 <Row>
                     <Col>
+
+                        <CampoSelect label="Cerca per categoria: " opzioni={categorie} selected={categoriaRicerca} onChangeSelect={onChangeSelect} />
 
                         <table className="table table-light table-bordered mt-3">
                             <thead>
@@ -49,8 +60,10 @@ function ListaMovimenti() {
 
                             </thead>
                             <tbody>
-                                {movimenti.map(movimento => (
-                                    <tr>
+                                {movimenti.filter(movimento =>
+                                    categoriaRicerca === "" || movimento.categoria === categoriaRicerca
+                                ).map((movimento, index) => (
+                                    <tr key={(index)}>
                                         <td>{movimento.ordinanteDenominazione}</td>
                                         <td>{movimento.ordinanteIban}</td>
                                         <td>{movimento.beneficiarioDenominazione}</td>
@@ -73,8 +86,21 @@ function ListaMovimenti() {
                     </Col>
                 </Row>
             </Container>
+
+
         </>
     );
 }
 
 export default ListaMovimenti;
+
+
+// toDoList.filter(toDo => ((categoriaRicerca === "" || toDo.categoria.toLowerCase().includes(categoriaRicerca.toLowerCase())) && (toDo.eseguita === eseguitaRicerca)).map((toDo, toDoIndex) => {
+//     return (
+//         <li key={toDoIndex}>
+//             Descrizione: {toDo.descrizione} Categoria: {toDo.categoria} Eseguita: {toDo.eseguita.toString()}<Pulsante id={toDo.id.toString()} testo="Vai al dettaglio" onClickHandler={onClickSuDettaglio} />
+//         </li>
+//     )
+
+// })
+// }
