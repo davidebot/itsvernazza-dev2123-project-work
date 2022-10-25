@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { userLogin } from "./actions";
+import { userLogin, userLogout } from "./actions";
 import { UserReducerType } from "./types";
 
 const initialState: UserReducerType = {
@@ -38,5 +38,8 @@ export const userReducer = createReducer(initialState, (builder) => {
                 state.logged = undefined;
                 state.loginError = "Utente o password non validi";
             }
+        })
+        .addCase(userLogout, (state) => {
+            state.logged = undefined;
         });
 });
