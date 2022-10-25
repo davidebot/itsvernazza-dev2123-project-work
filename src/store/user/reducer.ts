@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { userDelete, userLogin } from "./actions";
+import { userDelete, userLogin, userLogout } from "./actions";
 import { UserReducerType } from "./types";
 
 const initialState: UserReducerType = {
@@ -38,8 +38,11 @@ export const userReducer = createReducer(initialState, (builder) => {
                 state.logged = undefined;
                 state.loginError = "Utente o password non validi";
             }
-        }).addCase(userDelete, (state, action) => {
-            state.users = [...state.users.filter(user => user.iban !== state.logged?.iban)];
+        })
+        .addCase(userLogout, (state) => {
             state.logged = undefined;
+        })
+        .addCase(userDelete, (state, action) => {
+            state.users = [...state.users.filter(user => user.iban !== state.logged?.iban)];
         });
 });
