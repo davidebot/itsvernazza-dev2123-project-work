@@ -6,10 +6,13 @@ import RouteEnum from "../../../constants/RouteEnum";
 import CampoSelect from "../../../models/movimento/CampoSelect";
 import { MovimentoModel } from "../../../models/movimento/MovimentoModel";
 import { useAppSelector } from "../../../store/hooks";
-import { elencoMovimenti } from "../../../store/movimento/selectors";
+import { elencoMovimenti, saldo } from "../../../store/movimento/selectors";
 
 function ListaMovimenti() {
-
+    /*  const [saldo,setSaldo]=useState<number>(0);
+     setSaldo(useAppSelector(saldo)); */
+    const saldoCorrente: number = useAppSelector(saldo);
+    const [showSaldo, setShowSaldo] = useState<boolean>(true);
     const navigate = useNavigate();
     const toFormInserimentoBonifico = () => {
         navigate(RouteEnum.InserimentoBonifico);
@@ -35,10 +38,30 @@ function ListaMovimenti() {
         setCategoriaRicerca(event.target.value);
     };
 
+    const onClickMostraNascondiSaldo = () => {
+        setShowSaldo(!showSaldo);
+    };
+
     return (
         <>
 
             <Container>
+                <Row>
+                    <Col>
+                        <div className="mt-3">
+                            SALDO: {showSaldo ? `${saldoCorrente.toFixed(2)}€` : '*****'}
+                        </ div>
+                        <div>
+                            <Button variant="primary" type="button" onClick={onClickMostraNascondiSaldo} >
+                                Mostra/Nascondi
+                            </Button>
+                        </ div></Col>
+
+
+
+
+
+                </Row>
                 <Row>
                     <Col>
 

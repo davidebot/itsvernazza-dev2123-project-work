@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import CategoriaMovimentoEnum from "../../constants/CategoriaMovimentoEnum";
 import { MovimentoModel } from "../../models/movimento/MovimentoModel";
-import { inserimentoBonifico, inserimentoPrelievo, inserimentoVersamento } from "./actions";
+import { inserimentoBonifico, inserimentoCommissione, inserimentoPrelievo, inserimentoVersamento } from "./actions";
 import { MovimentiReducerType } from "./types";
 
 const initialState: MovimentiReducerType = {
@@ -74,5 +74,28 @@ export const movimentoReducer = createReducer(initialState, (builder) => {
                 }
             );
             state.movimenti = [...state.movimenti, nuovoMovimento];
+        })
+        .addCase(inserimentoCommissione, (state, action) => {
+            let idMovimento = 1;
+
+            if (state.movimenti.length > 0) {
+                idMovimento = (Math.max(...state.movimenti.map(movimento => movimento.idMovimento))) + 1;
+            }
+
+            let commissione = new MovimentoModel(
+                {
+                    idMovimento: idMovimento++,
+                    ordinanteDenominazione: action.payload.ordinanteDenominazione,
+                    ordinanteIban: action.payload.ordinanteIban,
+                    beneficiarioDenominazione: action.payload.ordinanteDenominazione,
+                    beneficiarioIban: action.payload.ordinanteIban,
+                    data: new Date().getTime(),
+                    categoria: CategoriaMovimentoEnum.Commissione,
+                    importo: action.payload.importo,
+                    causale: "Commissioni bancarie"
+                }
+            );
+
+            state.movimenti = [...state.movimenti, commissione];
         });
 });

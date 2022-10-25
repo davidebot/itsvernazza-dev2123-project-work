@@ -12,7 +12,7 @@ export default function CampoSelect(props: IProps) {
         <>
             <label>{label}</label>
             <Form.Select value={selected} onChange={onChangeSelect}>
-                <option value="">Seleziona categoria</option>
+                <option value="">Seleziona...</option>
                 {
 
                     opzioni.map(
