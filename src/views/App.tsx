@@ -9,6 +9,7 @@ import ListaMovimenti from "./movimenti/elencoMovimenti/ListaMovimenti";
 import FormInserimentoMovimento from "./movimenti/formInserimento/FormInserimentoMovimento";
 import ElencoContatti from "./rubrica/ElencoContatti/ElencoContatti";
 import FormInserimentoContatto from "./rubrica/formInserimentoContatto/FormInserimentoContatto";
+import ModificaContatto from "./rubrica/modificaContatto/ModificaContatto";
 import Template from "./Template";
 import GestioneProfiloPage from "./user/GestioneProfiloPage";
 import UserLoginPage from "./user/UserLoginPage";
@@ -25,7 +26,6 @@ const App: React.FC = (): JSX.Element => {
                     <Route path={RouteEnum.InserimentoBonifico} element={<FormInserimentoMovimento />} />
                     <Route path={RouteEnum.InserimentoContatto} element={<FormInserimentoContatto />} />
                     <Route path={RouteEnum.ModificaContatto} element={<ModificaContatto />} />
-                    <Route path={RouteEnum.AtmSimulato} element={<>TODO</>} />
                     <Route path={RouteEnum.AtmSimulato} element={<AtmSceltaOperazionePage />} />
                     <Route path={RouteEnum.Prelievo} element={<AtmPrelievoPage />} />
                     <Route path={RouteEnum.Versamento} element={<AtmVersamentoPage />} />
