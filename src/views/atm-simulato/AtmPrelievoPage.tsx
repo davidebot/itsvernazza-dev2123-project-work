@@ -2,18 +2,44 @@ import { useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import RouteEnum from "../../constants/RouteEnum";
+import InserimentoMovimentoATMModel from "../../models/movimento/InserimentoMovimentoATMModel";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { inserimentoPrelievo } from "../../store/movimento/actions";
+import { saldo } from "../../store/movimento/selectors";
+import { currentUser, userDenominazione } from "../../store/user/selectors";
 import DatiUtente from "./DatiUtente";
 
 const AtmPrelievoPage: React.FC = (): JSX.Element => {
+
+    const utente = useAppSelector(currentUser);
+    const denominazione = useAppSelector(userDenominazione);
+    const saldoCorrente = useAppSelector(saldo);
+
+    const dispatch = useAppDispatch();
+
 
     const navigate = useNavigate();
 
     const [statoPagina, setStatoPagina] = useState<"1" | "2" | "3">("1");
 
-    const [importo, setImporto] = useState<string>("");
+    const [importo, setImporto] = useState<string>("0");
 
     const onClickConferma = () => {
-        setStatoPagina("3");
+        if (denominazione !== undefined && utente !== undefined && saldoCorrente >= parseInt(importo)) {
+            const nuovoPrelievo: InserimentoMovimentoATMModel = {
+                importo: parseInt(importo),
+                beneficiarioIban: utente?.iban,
+                ordinanteIban: utente?.iban,
+                ordinanteDenominazione: denominazione,
+                beneficiarioDenominazione: denominazione,
+            };
+            dispatch(inserimentoPrelievo(nuovoPrelievo));
+            setStatoPagina("3");
+        }
+    };
+
+    const onClickIndietro = () => {
+        setStatoPagina("1");
     };
 
     const onClickFine = () => {
@@ -76,12 +102,12 @@ const AtmPrelievoPage: React.FC = (): JSX.Element => {
                     </Row>
                     <Row className="justify-content-center" lg={6}>
                         <Col>
-                            <input type={"text"} className="form-control" placeholder="Importo personalizzato" value={importo} onChange={(event) => setImporto(event.target.value)} />
+                            <input type="number" className="form-control" placeholder="Importo personalizzato" value={importo} onChange={(event) => setImporto(event.target.value)} />
                         </Col>
                     </Row>
                     <Row className="justify-content-end" lg={6}>
                         <Col>
-                            <Button onClick={() => setStatoPagina("2")} className="btn btn-lg">{"->"}</Button>
+                            <Button disabled={importo === "" || parseInt(importo) === 0} onClick={() => setStatoPagina("2")} className="btn btn-lg">{"->"}</Button>
                         </Col>
                     </Row>
                 </>
@@ -98,7 +124,10 @@ const AtmPrelievoPage: React.FC = (): JSX.Element => {
                     </Row>
                     <Row className="justify-content-center" lg={6}>
                         <Col>
-                            <Button className="btn btn-lg" onClick={onClickConferma}>CONFERMA</Button>
+                            <Button className="btn btn-lg" onClick={onClickIndietro}>INDIETRO</Button>
+                        </Col>
+                        <Col>
+                            <Button disabled={parseInt(importo) > saldoCorrente} className="btn btn-lg" onClick={onClickConferma}>CONFERMA</Button>
                         </Col>
                     </Row>
                 </>

@@ -2,18 +2,41 @@ import { useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import RouteEnum from "../../constants/RouteEnum";
+import InserimentoMovimentoATMModel from "../../models/movimento/InserimentoMovimentoATMModel";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { inserimentoVersamento } from "../../store/movimento/actions";
+import { currentUser, userDenominazione } from "../../store/user/selectors";
 import DatiUtente from "./DatiUtente";
 
 const AtmVersamentoPage: React.FC = (): JSX.Element => {
+
+    const utente = useAppSelector(currentUser);
+    const denominazione = useAppSelector(userDenominazione);
+
+    const dispatch = useAppDispatch();
 
     const navigate = useNavigate();
 
     const [statoPagina, setStatoPagina] = useState<"1" | "2" | "3">("1");
 
-    const [importo, setImporto] = useState<string>("");
+    const [importo, setImporto] = useState<string>("0");
 
     const onClickConfermaVersamento = () => {
-        setStatoPagina("3");
+        if (denominazione !== undefined && utente !== undefined) {
+            const nuovoVersamento: InserimentoMovimentoATMModel = {
+                importo: parseInt(importo),
+                beneficiarioIban: utente?.iban,
+                ordinanteIban: utente?.iban,
+                ordinanteDenominazione: denominazione,
+                beneficiarioDenominazione: denominazione,
+            };
+            dispatch(inserimentoVersamento(nuovoVersamento));
+            setStatoPagina("3");
+        }
+    };
+
+    const onClickIndietro = () => {
+        setStatoPagina("1");
     };
 
     const onClickFine = () => {
@@ -45,7 +68,7 @@ const AtmVersamentoPage: React.FC = (): JSX.Element => {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text">€</span>
                                 </div>
-                                <input type="text" className="form-control" value={importo} onChange={(event) => setImporto(event.target.value)} />
+                                <input type="number" className="form-control" value={importo} onChange={(event) => setImporto(event.target.value)} />
                                 <div className="input-group-append">
                                     <span className="input-group-text">.00</span>
                                 </div>
@@ -55,10 +78,8 @@ const AtmVersamentoPage: React.FC = (): JSX.Element => {
 
                     <Row className="justify-content-around  pt-5 pb-3  text-center"  >
                         <Col class="col-md-6">
-                            <Button type="button" className="btn btn-secondary btn-lg" onClick={() => setStatoPagina("2")}>Versa</Button>
+                            <Button disabled={importo === "" || parseInt(importo) <= 0} type="button" className="btn btn-lg" onClick={() => setStatoPagina("2")}>Versa</Button>
                         </Col>
-
-
                     </Row>
                 </>
             }
@@ -74,6 +95,9 @@ const AtmVersamentoPage: React.FC = (): JSX.Element => {
                         </Col>
                     </Row>
                     <Row className="justify-content-center" lg={6}>
+                        <Col>
+                            <Button className="btn btn-lg" onClick={onClickIndietro}>INDIETRO</Button>
+                        </Col>
                         <Col>
                             <Button className="btn btn-lg" onClick={onClickConfermaVersamento}>CONFERMA</Button>
                         </Col>

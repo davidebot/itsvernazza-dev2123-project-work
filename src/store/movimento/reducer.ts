@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import CategoriaMovimentoEnum from "../../constants/CategoriaMovimentoEnum";
 import { MovimentoModel } from "../../models/movimento/MovimentoModel";
-import { inserimentoBonifico } from "./actions";
+import { inserimentoBonifico, inserimentoPrelievo, inserimentoVersamento } from "./actions";
 import { MovimentiReducerType } from "./types";
 
 const initialState: MovimentiReducerType = {
@@ -35,6 +35,42 @@ export const movimentoReducer = createReducer(initialState, (builder) => {
                     data: new Date().getTime(),
                     categoria: CategoriaMovimentoEnum.Bonifico,
 
+                }
+            );
+            state.movimenti = [...state.movimenti, nuovoMovimento];
+        })
+        .addCase(inserimentoVersamento, (state, action) => {
+            let idMovimento = 1;
+
+            if (state.movimenti.length > 0) {
+                idMovimento = (Math.max(...state.movimenti.map(movimento => movimento.idMovimento))) + 1;
+            }
+
+            let nuovoMovimento = new MovimentoModel(
+                {
+                    ...action.payload,
+                    idMovimento,
+                    data: new Date().getTime(),
+                    categoria: CategoriaMovimentoEnum.Versamento,
+                    causale: "Versamento contante",
+                }
+            );
+            state.movimenti = [...state.movimenti, nuovoMovimento];
+        })
+        .addCase(inserimentoPrelievo, (state, action) => {
+            let idMovimento = 1;
+
+            if (state.movimenti.length > 0) {
+                idMovimento = (Math.max(...state.movimenti.map(movimento => movimento.idMovimento))) + 1;
+            }
+
+            let nuovoMovimento = new MovimentoModel(
+                {
+                    ...action.payload,
+                    idMovimento,
+                    data: new Date().getTime(),
+                    categoria: CategoriaMovimentoEnum.Prelievo,
+                    causale: "Prelievo contante",
                 }
             );
             state.movimenti = [...state.movimenti, nuovoMovimento];
