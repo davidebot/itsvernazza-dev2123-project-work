@@ -46,6 +46,12 @@ const Header: React.FC = (): JSX.Element => {
                                         </Nav.Link>
                                     </Nav.Item>
 
+                                    <Nav.Item>
+                                        <Nav.Link onClick={() => navigate(RouteEnum.Gestione)}>
+                                            Gestione
+                                        </Nav.Link>
+                                    </Nav.Item>
+
 
                                     <Dropdown >
                                         <Dropdown.Toggle variant="primary" id="dropdown-basic">
@@ -53,7 +59,7 @@ const Header: React.FC = (): JSX.Element => {
                                         </Dropdown.Toggle>
 
                                         <Dropdown.Menu align={{ lg: "end" }}>
-                                            <Dropdown.Item href="#/action-1" as={Link} to={RouteEnum.Gestione}>Il mio profilo</Dropdown.Item>
+                                            <Dropdown.Item href="#/action-1" as={Link} to={RouteEnum.Profilo}>Il mio profilo</Dropdown.Item>
                                             <Dropdown.Item onClick={logout} href="#/action-2" as={Link} to={RouteEnum.Login}>Logout</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>

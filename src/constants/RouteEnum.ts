@@ -4,7 +4,8 @@ enum RouteEnum {
     Movimenti = "/movimenti",
     InserimentoBonifico = "/inserimento-bonifico",
     AtmSimulato = "/atm-simulato",
-    Gestione = "/account"
+    Gestione = "/gestione",
+    Profilo = "/profilo"
 }
 
 export default RouteEnum;

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import RouteEnum from "../constants/RouteEnum";
+import GestionePage from "./gestione/GestionePage";
 import ListaMovimenti from "./movimenti/elencoMovimenti/ListaMovimenti";
 import FormInserimento from "./movimenti/formInserimento/FormInserimento";
 import Template from "./Template";
@@ -18,7 +19,8 @@ const App: React.FC = (): JSX.Element => {
                     <Route path={RouteEnum.Movimenti} element={<ListaMovimenti />} />
                     <Route path={RouteEnum.InserimentoBonifico} element={<FormInserimento />} />
                     <Route path={RouteEnum.AtmSimulato} element={<>TODO</>} />
-                    <Route path={RouteEnum.Gestione} element={<GestioneProfiloPage />} />
+                    <Route path={RouteEnum.Gestione} element={<GestionePage />} />
+                    <Route path={RouteEnum.Profilo} element={<GestioneProfiloPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>
