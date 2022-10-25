@@ -24,6 +24,8 @@ const App: React.FC = (): JSX.Element => {
                     <Route path={RouteEnum.Movimenti} element={<ListaMovimenti />} />
                     <Route path={RouteEnum.InserimentoBonifico} element={<FormInserimentoMovimento />} />
                     <Route path={RouteEnum.InserimentoContatto} element={<FormInserimentoContatto />} />
+                    <Route path={RouteEnum.ModificaContatto} element={<ModificaContatto />} />
+                    <Route path={RouteEnum.AtmSimulato} element={<>TODO</>} />
                     <Route path={RouteEnum.AtmSimulato} element={<AtmSceltaOperazionePage />} />
                     <Route path={RouteEnum.Prelievo} element={<AtmPrelievoPage />} />
                     <Route path={RouteEnum.Versamento} element={<AtmVersamentoPage />} />
