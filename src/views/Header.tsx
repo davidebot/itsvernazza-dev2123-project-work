@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Container, Dropdown, Nav, Navbar } from "react-bootstrap";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import RouteEnum from "../constants/RouteEnum";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { userLogout } from "../store/user/actions";
@@ -46,17 +46,17 @@ const Header: React.FC = (): JSX.Element => {
                                         </Nav.Link>
                                     </Nav.Item>
 
-                                    <Nav.Item>
-                                        <Nav.Link onClick={() => navigate(RouteEnum.Gestione)}>
-                                            Profilo
-                                        </Nav.Link>
-                                    </Nav.Item>
 
-                                    <Nav.Item>
-                                        <Nav.Link className="text-danger fw-bolder" onClick={() => logout()}>
-                                            Logout
-                                        </Nav.Link>
-                                    </Nav.Item>
+                                    <Dropdown >
+                                        <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                                            👤 Account
+                                        </Dropdown.Toggle>
+
+                                        <Dropdown.Menu align={{ lg: "end" }}>
+                                            <Dropdown.Item href="#/action-1" as={Link} to={RouteEnum.Gestione}>Il mio profilo</Dropdown.Item>
+                                            <Dropdown.Item onClick={logout} href="#/action-2" as={Link} to={RouteEnum.Login}>Logout</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
                                 </>
                             )}
                         </Nav>

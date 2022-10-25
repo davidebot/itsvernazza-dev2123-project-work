@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import RouteEnum from "../constants/RouteEnum";
-import GestionePage from "./gestione/GestionePage";
 import ListaMovimenti from "./movimenti/elencoMovimenti/ListaMovimenti";
 import FormInserimento from "./movimenti/formInserimento/FormInserimento";
 import Template from "./Template";
+import GestioneProfiloPage from "./user/GestioneProfiloPage";
 import UserLoginPage from "./user/UserLoginPage";
 
 const App: React.FC = (): JSX.Element => {
@@ -18,7 +18,7 @@ const App: React.FC = (): JSX.Element => {
                     <Route path={RouteEnum.Movimenti} element={<ListaMovimenti />} />
                     <Route path={RouteEnum.InserimentoBonifico} element={<FormInserimento />} />
                     <Route path={RouteEnum.AtmSimulato} element={<>TODO</>} />
-                    <Route path={RouteEnum.Gestione} element={<GestionePage />} />
+                    <Route path={RouteEnum.Gestione} element={<GestioneProfiloPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>
