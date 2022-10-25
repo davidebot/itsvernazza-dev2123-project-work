@@ -76,38 +76,51 @@ const AtmPrelievoPage: React.FC = (): JSX.Element => {
             <DatiUtente />
             {statoPagina === "1" &&
                 <>
-                    <Row className="justify-content-around py-3" lg={6}>
+                    <Row className="justify-content-around  mt-5 py-3  text-center">
+
+                        <Col sm={6} >
+                            <label
+                                className="py-3 h4"
+                            >
+                                Scegliere l'importo da prelevare
+                            </label>
+                        </Col>
+
+                    </Row>
+                    <Row className="justify-content-center py-3" lg={6}>
                         <Col>
-                            <Button className="btn btn-lg" onClick={onClickDieci}>10</Button>
+                            <Button className="btn btn-secondary btn-lg" onClick={onClickDieci}>€ 10.00</Button>
                         </Col>
                         <Col>
-                            <Button className="btn btn-lg" onClick={onClickCento}>100</Button>
+                            <Button className="btn btn-secondary btn-lg" onClick={onClickCento}>€ 100.00</Button>
                         </Col>
                     </Row>
-                    <Row className="justify-content-around py-3" lg={6}>
+                    <Row className="justify-content-center py-3" lg={6}>
                         <Col>
-                            <Button className="btn btn-lg" onClick={onClickVenti}>20</Button>
+                            <Button className="btn btn-secondary btn-lg" onClick={onClickVenti}>€ 20.00</Button>
                         </Col>
                         <Col>
-                            <Button className="btn btn-lg" onClick={onClickDuecento}>200</Button>
-                        </Col>
-                    </Row>
-                    <Row className="justify-content-around py-3" lg={6}>
-                        <Col>
-                            <Button className="btn btn-lg" onClick={onClickCinquanta}>50</Button>
-                        </Col>
-                        <Col>
-                            <Button className="btn btn-lg" onClick={onClickCinquecento}>500</Button>
+                            <Button className="btn btn-secondary btn-lg" onClick={onClickDuecento}>€ 200.00</Button>
                         </Col>
                     </Row>
-                    <Row className="justify-content-center" lg={6}>
+                    <Row className="justify-content-center py-3" lg={6}>
                         <Col>
-                            <input type="number" className="form-control" placeholder="Importo personalizzato" value={importo} onChange={(event) => setImporto(event.target.value)} />
+                            <Button className="btn btn-secondary btn-lg" onClick={onClickCinquanta}>€ 50.00</Button>
+                        </Col>
+                        <Col>
+                            <Button className="btn btn-secondary btn-lg" onClick={onClickCinquecento}> € 500.00</Button>
                         </Col>
                     </Row>
-                    <Row className="justify-content-end" lg={6}>
-                        <Col>
-                            <Button disabled={importo === "" || parseInt(importo) === 0} onClick={() => setStatoPagina("2")} className="btn btn-lg">{"->"}</Button>
+                    <Container >
+                        <Row className="justify-content-center py-3" lg={6}>
+                            <Col className="justify-content-center py-3" >
+                                <input type="number" className="form-control" placeholder="Importo personalizzato" value={importo} onChange={(event) => setImporto(event.target.value)} />
+                            </Col>
+                        </Row>
+                    </Container>
+                    <Row className="justify-content-end py-3" lg={6}>
+                        <Col className="justify-content-end py-3">
+                            <Button disabled={importo === "" || parseInt(importo) === 0} onClick={() => setStatoPagina("2")} className="btn  btn-primary btn-lg">AVANTI</Button>
                         </Col>
                     </Row>
                 </>
@@ -115,19 +128,19 @@ const AtmPrelievoPage: React.FC = (): JSX.Element => {
             {
                 statoPagina === "2" &&
                 <>
-                    <Row className="justify-content-center" lg={6}>
-                        <Col>
-                            <label>
-                                Prelievo: {importo}
+                    <Row className="justify-content-center py-3" lg={6}>
+                        <Col className="py-3">
+                            <label className="h4" >
+                                Prelievo: € {parseInt(importo).toFixed(2)}
                             </label>
                         </Col>
                     </Row>
-                    <Row className="justify-content-center" lg={6}>
-                        <Col>
-                            <Button className="btn btn-lg" onClick={onClickIndietro}>INDIETRO</Button>
+                    <Row className="justify-content-center py-3" lg={6}>
+                        <Col className="py-3">
+                            <Button className="btn btn-secondary btn-lg" onClick={onClickIndietro}>INDIETRO</Button>
                         </Col>
-                        <Col>
-                            <Button disabled={parseInt(importo) > saldoCorrente} className="btn btn-lg" onClick={onClickConferma}>CONFERMA</Button>
+                        <Col className="py-3">
+                            <Button disabled={parseInt(importo) > saldoCorrente} className="btn btn-primary btn-lg" onClick={onClickConferma}>CONFERMA</Button>
                         </Col>
                     </Row>
                 </>
@@ -135,19 +148,19 @@ const AtmPrelievoPage: React.FC = (): JSX.Element => {
             {
                 statoPagina === "3" &&
                 <>
-                    <Row className="justify-content-center" lg={6}>
-                        <Col>
+                    <Row className="justify-content-center py-3 " lg={6}>
+                        <Col >
                             <label>OPERAZIONE ESEGUITA CON SUCCESSO</label>
                         </Col>
                     </Row>
-                    <Row className="justify-content-end" lg={6}>
+                    <Row className="justify-content-end py-3" lg={6}>
                         <Col>
-                            <Button onClick={onClickFine} className="btn btn-lg">Effettua una nuova operazione</Button>
+                            <Button onClick={onClickFine} className="btn  btn-primary btn-lg">Effettua una nuova operazione</Button>
                         </Col>
                     </Row>
                 </>
             }
-        </Container>
+        </Container >
     );
 };
 

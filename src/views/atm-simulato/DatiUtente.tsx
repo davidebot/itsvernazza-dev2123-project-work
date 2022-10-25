@@ -11,10 +11,10 @@ const DatiUtente: React.FC = (): JSX.Element => {
     return (
         <Row className="justify-content-around py-3" lg={6}>
             <Col>
-                <label className="py-3">{utente}</label>
+                <label className="py-3 h5">{utente}</label>
             </Col>
             <Col>
-                <label className="py-3">Saldo: {saldoCorrente.toFixed(2)}€</label>
+                <label className="py-3 h5">Saldo: {saldoCorrente.toFixed(2)}€</label>
             </Col>
         </Row>
     );

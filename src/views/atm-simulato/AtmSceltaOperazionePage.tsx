@@ -24,11 +24,11 @@ const AtmSceltaOperazionePage: React.FC = (): JSX.Element => {
 
                 <Row className="justify-content-around py-3" lg={6}>
                     <Col md={6}>
-                        <Button type="button" className="btn btn-lg" onClick={onClickPrelievo}>PRELIEVO</Button>
+                        <Button type="button" className="btn  btn-secondary btn-lg" onClick={onClickPrelievo}>PRELIEVO</Button>
                     </Col>
 
                     <Col md={6}>
-                        <Button type="button" className="btn btn-lg" onClick={onClickVersamento} >VERSAMENTO</Button>
+                        <Button type="button" className="btn btn-secondary btn-lg" onClick={onClickVersamento} >VERSAMENTO</Button>
                     </Col>
 
                 </Row>
