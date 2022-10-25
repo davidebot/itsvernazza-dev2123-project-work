@@ -1,12 +1,9 @@
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import RouteEnum from "../../../constants/RouteEnum";
 import { ContattoModel } from "../../../models/contatto/ContattoModel";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { modificaContatto } from "../../../store/rubrica/actions";
 import { elencoContatti } from "../../../store/rubrica/selectors";
-import CampoInput from "../../movimenti/components/CampoInput";
 
 function ElencoContatti() {
     const showForm: boolean = false;
@@ -17,21 +14,21 @@ function ElencoContatti() {
         navigate(RouteEnum.InserimentoContatto);
     };
 
-    const onClickModificaContatto = (contattoDaTrovare: ContattoModel) => {
+    // const onClickModificaContatto = (contattoDaTrovare: ContattoModel) => {
 
 
-        const contattoModificato: ContattoModel = {
-            idContatto: contattoDaModificare.idContatto,
-            denominazione: contattoDaModificare.denominazione,
-            iban: contattoDaModificare.iban
-        };
-        dispatch(modificaContatto(contattoModificato));
-    };
+    //     const contattoModificato: ContattoModel = {
+    //         idContatto: contattoDaModificare.idContatto,
+    //         denominazione: contattoDaModificare.denominazione,
+    //         iban: contattoDaModificare.iban
+    //     };
+    //     dispatch(modificaContatto(contattoModificato));
+    // };
 
     return (
         <>
 
-            <Container>
+            {/* <Container>
                 <Row>
                     <Col>
 
@@ -112,7 +109,7 @@ function ElencoContatti() {
                         </Card>
                     </Col>
                 </Row>)}
-            </Container>
+            </Container> */}
         </>
     );
 }
